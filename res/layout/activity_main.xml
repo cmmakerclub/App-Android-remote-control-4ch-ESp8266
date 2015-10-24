@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:columnCount="3"
+    android:orientation="horizontal"
+    android:rowCount="3" >
+
+    <com.example.espdronesremote.JoystickView
+        android:id="@+id/joystickView"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_above="@+id/kdUp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_weight="0.10" />
+
+    <TextView
+        android:id="@+id/angleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/joystickView2"
+        android:text="angle" />
+
+    <TextView
+        android:id="@+id/powerTextView"
+        android:layout_width="324dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/angleTextView"
+        android:layout_alignBottom="@+id/angleTextView"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="76dp"
+        android:text="power" />
+
+    <TextView
+        android:id="@+id/directionTextView"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/angleTextView"
+        android:layout_weight="0.01"
+        android:text="x,y" />
+
+    <com.example.espdronesremote.JoystickView
+        android:id="@+id/joystickView2"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_alignBottom="@+id/kpValue"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_weight="0.10" />
+
+    <TextView
+        android:id="@+id/joy2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/directionTextView"
+        android:text="ch3 - ch4" />
+
+    <TextView
+        android:id="@+id/dataOuT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/joy2"
+        android:text="data out"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/kdValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/joystickView"
+        android:text="kd" />
+
+    <TextView
+        android:id="@+id/check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dataOuT"
+        android:layout_marginLeft="36dp"
+        android:layout_toRightOf="@+id/powerTextView"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/kpValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/kdValue"
+        android:layout_alignBottom="@+id/kdValue"
+        android:layout_marginLeft="18dp"
+        android:layout_toRightOf="@+id/joystickView2"
+        android:text="kp" />
+
+    <TextView
+        android:id="@+id/kiValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/kdValue"
+        android:layout_alignBottom="@+id/kdValue"
+        android:layout_alignLeft="@+id/kiUp"
+        android:layout_marginLeft="21dp"
+        android:text="ki" />
+
+    <Button
+        android:id="@+id/kpDown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/check"
+        android:layout_alignBottom="@+id/check"
+        android:layout_toLeftOf="@+id/kiDown"
+        android:text="-kp" />
+
+    <Button
+        android:id="@+id/kpUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/angleTextView"
+        android:layout_toLeftOf="@+id/kiDown"
+        android:text="+kp" />
+
+    <Button
+        android:id="@+id/kiDown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/kiUp"
+        android:layout_below="@+id/kpUp"
+        android:text="-ki" />
+
+    <Button
+        android:id="@+id/kiUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/kiDown"
+        android:layout_toLeftOf="@+id/kdUp"
+        android:text="+ki" />
+
+    <Button
+        android:id="@+id/kdDown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/kiUp"
+        android:layout_toRightOf="@+id/kiDown"
+        android:text="-kd" />
+
+    <Button
+        android:id="@+id/kdUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/kdValue"
+        android:layout_below="@+id/angleTextView"
+        android:text="+kd" />
+        
+    </RelativeLayout>
+
