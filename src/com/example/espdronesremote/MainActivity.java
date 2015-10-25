@@ -25,17 +25,20 @@ import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class MainActivity extends Activity implements OnClickListener{
 	String value;
 	long count = 0;
-	 private TextView angleTextView;
+	 /*private TextView angleTextView;
 	    private TextView powerTextView;
 	    private TextView directionTextView;
 	    private TextView joy2,dataOut,sendOk;
 	    private Button kpUp ,kiUp ,kdUp,kpDown,kiDown,kdDown;
 	    private TextView kpValue,kiValue,kdValue;
+	    */
+	private TextView sendOk;
 	    //TimerTask mTimer;
 	    //private SeekBar seekBar;
 	    // Importing also other views
@@ -62,13 +65,13 @@ public class MainActivity extends Activity implements OnClickListener{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);//Alway on
-		
+		sendOk = (TextView) findViewById(R.id.showData);
 		//set up to connect UI
-		angleTextView = (TextView) findViewById(R.id.angleTextView);
-        powerTextView = (TextView) findViewById(R.id.powerTextView);
-        directionTextView = (TextView) findViewById(R.id.directionTextView);
-        joy2 = (TextView) findViewById(R.id.joy2);
-        dataOut = (TextView)findViewById(R.id.dataOuT);
+		//angleTextView = (TextView) findViewById(R.id.angleTextView);
+       // powerTextView = (TextView) findViewById(R.id.powerTextView);
+       // directionTextView = (TextView) findViewById(R.id.directionTextView);
+        //joy2 = (TextView) findViewById(R.id.joy2);
+       /* dataOut = (TextView)findViewById(R.id.dataOuT);
         sendOk = (TextView) findViewById(R.id.check);
         
         kpUp= (Button) findViewById(R.id.kpUp);
@@ -95,6 +98,7 @@ public class MainActivity extends Activity implements OnClickListener{
         kpValue.setText(""+kpShow);
         kiValue.setText(""+kiShow);
         kdValue.setText(""+kdShow);
+        */
         // Add Button event
        /* kpUp.setOnClickListener(new View.OnClickListener() {
           @Override
@@ -176,11 +180,12 @@ public class MainActivity extends Activity implements OnClickListener{
         joystick2 = (JoystickView) findViewById(R.id.joystickView2);
         joystick2.tLMode = true;
         joystick2.setyPositionY((int)y2);
-        
+        /*
         joy2.setText("y2 = "+String.valueOf(y2)+"   x2 = "+String.valueOf(x2));
         directionTextView.setText("y = "+String.valueOf(y)+"   x = "+String.valueOf(x));
         dataOut.setText("Ele = "+String.valueOf(ch1_ele)+"  Roll = "+String.valueOf(ch2_roll)+"  Power = "+String.valueOf(ch3_power)+"  Yaw = "+String.valueOf(ch4_yaw));
         sendOk.setText("No send");
+        */
         //
         //new Timer().scheduleAtFixedRate(new TimerTask()  {
          //   @Override
@@ -193,8 +198,8 @@ public class MainActivity extends Activity implements OnClickListener{
                 // TODO Auto-generated method stub
             	
             	
-                angleTextView.setText(" " + String.valueOf(angle) + "'");
-                powerTextView.setText(" " + String.valueOf(power) + "%");
+                //angleTextView.setText(" " + String.valueOf(angle) + "'");
+                //powerTextView.setText(" " + String.valueOf(power) + "%");
                 
                 y = (int) ((Math.cos(Math.toRadians(angle)))*power);
             	x = (int) ((Math.sin(Math.toRadians(angle)))*power);
@@ -204,7 +209,7 @@ public class MainActivity extends Activity implements OnClickListener{
             	//sendFinish = false;
     		     //end send data
             	
-                directionTextView.setText("y = "+String.valueOf(y)+"   x = "+String.valueOf(x));
+                //directionTextView.setText("y = "+String.valueOf(y)+"   x = "+String.valueOf(x));
             }
         }, JoystickView.DEFAULT_LOOP_INTERVAL);
         ///
@@ -217,14 +222,14 @@ public class MainActivity extends Activity implements OnClickListener{
             	startJoy2 = true;
             	joystick2.tMode = true;
             	joystick2.tLMode = false;
-                angleTextView.setText(" " + String.valueOf(angle) + "'");
-                powerTextView.setText(" " + String.valueOf(power) + "%");
+                //angleTextView.setText(" " + String.valueOf(angle) + "'");
+                //powerTextView.setText(" " + String.valueOf(power) + "%");
                 
                 y2 = (int) ((Math.cos(Math.toRadians(angle)))*power);
             	x2 = (int) ((Math.sin(Math.toRadians(angle)))*power);
             	
             	
-            	 joy2.setText("y2 = "+String.valueOf(y2)+"   x2 = "+String.valueOf(x2));
+            	 //joy2.setText("y2 = "+String.valueOf(y2)+"   x2 = "+String.valueOf(x2));
             	 sendUDPdata();
             	 //sendFinish = false;
      		     //end send data
@@ -257,6 +262,7 @@ public class MainActivity extends Activity implements OnClickListener{
 	 @Override
      public void onClick(View v) {
          switch(v.getId()){
+         /*
              case R.id.kpUp:
                   //DO something
             	 kpSend++;
@@ -303,6 +309,7 @@ public class MainActivity extends Activity implements OnClickListener{
              	  kdShow = (float)(kdSend)/10;
              	  kdValue.setText(""+kdShow);
             break;
+            */
          }
 
    }
@@ -345,6 +352,61 @@ public class MainActivity extends Activity implements OnClickListener{
         		ch3_power = 0;	
         	}
         	ch4_yaw =  (int) ((x2+99)*1.28);
+        	//offset
+        	//
+        	//.... CH1 ....
+        	if(ch1_ele > 126){//offset up elev
+        		if(ch1_ele < 136){
+        			ch1_ele = 126;
+        		}else{
+        			ch1_ele -= 9;
+        		}
+        		
+        	}
+        	if(ch1_ele < 126){//offset down elev
+        		if(ch1_ele > 116){
+        			ch1_ele = 126;
+        		}else{
+        			ch1_ele += 9;
+        		}
+        	}
+        	//
+        	//------- Ch2 ------
+        	if(ch2_roll > 126){//offset right roll
+        		if(ch2_roll < 136){
+        			ch2_roll = 126;
+        		}else{
+        			ch2_roll -= 9;
+        		}
+        		
+        	}
+        	if(ch2_roll < 126){//offset left roll 
+        		if(ch2_roll > 116){
+        			ch2_roll = 126;
+        		}
+        		else{
+        			ch2_roll += 9;
+        		}
+        	}
+        	//
+        	//++++++++  CH4  ++++++++
+        	if(ch4_yaw > 126){//offset right yaw
+        		if(ch4_yaw < 136){
+        			ch4_yaw = 126;
+        		}else{
+        			ch4_yaw -= 9;
+        		}
+        		
+        	}
+        	if(ch4_yaw < 126){//offset left yaw 
+        		if(ch4_yaw > 116){
+        			ch4_yaw = 126;
+        		}else{
+        			ch4_yaw += 9;
+        		}
+        	}
+        	//
+        	//end off set
         	//dataOut.setText("Ele = "+String.valueOf(ch1_ele)+"  Roll = "+String.valueOf(ch2_roll)+"  Power = "+String.valueOf(ch3_power)+"  Yaw = "+String.valueOf(ch4_yaw));
         	//
         	
@@ -417,13 +479,13 @@ public class MainActivity extends Activity implements OnClickListener{
 		  @Override
 		  protected void onPostExecute(Void result) {
 		  // textResponse.setText(response);
-			  //Toast.makeText(getApplicationContext(), "this is my Toast message!!! =)",Toast.LENGTH_SHORT).show();
+			  //Toast.makeText(getApplicationContext(), "Send OK"+count+" "+num,Toast.LENGTH_SHORT).show();
 			  sendOk.setText("Send OK"+count+" "+num);
 			  if(ch3_power > 100){
 				 // dataOut.setText("Ele = "+String.valueOf(ch1_ele)+"  Roll = "+String.valueOf(ch2_roll)+"  Power = "+String.valueOf(ch3_power)+"  Yaw = "+String.valueOf(ch4_yaw)+"!!!"); 
 				 xxx = "!!!" ;
 			  }
-			  dataOut.setText("Ele = "+String.valueOf(ch1_ele)+"  Roll = "+String.valueOf(ch2_roll)+"  Power = "+String.valueOf(ch3_power)+"  Yaw = "+String.valueOf(ch4_yaw)+" "+xxx);
+			  //dataOut.setText("Ele = "+String.valueOf(ch1_ele)+"  Roll = "+String.valueOf(ch2_roll)+"  Power = "+String.valueOf(ch3_power)+"  Yaw = "+String.valueOf(ch4_yaw)+" "+xxx);
 			  
 			  sendCount--;
 		   super.onPostExecute(result);
