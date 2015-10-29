@@ -25,7 +25,7 @@ import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
+//import android.widget.Toast;
 
 
 public class MainActivity extends Activity implements OnClickListener{
@@ -38,6 +38,7 @@ public class MainActivity extends Activity implements OnClickListener{
 	    private Button kpUp ,kiUp ,kdUp,kpDown,kiDown,kdDown;
 	    private TextView kpValue,kiValue,kdValue;
 	    */
+	private Button tRightP,tLeftP;
 	private TextView sendOk;
 	    //TimerTask mTimer;
 	    //private SeekBar seekBar;
@@ -56,7 +57,7 @@ public class MainActivity extends Activity implements OnClickListener{
 	    int sendCount = 0;
 	    private int REFRESH_TIME = 60;
 	    
-	    int kpSend,kiSend,kdSend;
+	    int kpSend,kiSend,kdSend,trimYaw = 0;
 	    float kpShow,kiShow,kdShow;// = kpSend/100
 	    /** Called when the activity is first created. */
 
@@ -99,6 +100,11 @@ public class MainActivity extends Activity implements OnClickListener{
         kiValue.setText(""+kiShow);
         kdValue.setText(""+kdShow);
         */
+		 tRightP = (Button) findViewById(R.id.tYawRight);
+	        tLeftP  = (Button) findViewById(R.id.tYawLeft);
+	        
+	        tRightP.setOnClickListener(this);
+	        tLeftP.setOnClickListener(this);
         // Add Button event
        /* kpUp.setOnClickListener(new View.OnClickListener() {
           @Override
@@ -262,54 +268,23 @@ public class MainActivity extends Activity implements OnClickListener{
 	 @Override
      public void onClick(View v) {
          switch(v.getId()){
-         /*
-             case R.id.kpUp:
+         
+             case R.id.tYawRight:
                   //DO something
-            	 kpSend++;
-           	  kpShow = (float)(kpSend)/10;
-           	  kpValue.setText(""+kpShow);
+            	 trimYaw++;
+            	 //kpSend++;
+           	  //kpShow = (float)(kpSend)/10;
+           	  //kpValue.setText(""+kpShow);
              break;
-             case R.id.kiUp:
+             case R.id.tYawLeft:
                   //DO something
-            	 kiSend++;
-             	  kiShow = (float)(kiSend)/10;
-             	  kiValue.setText(""+kiShow);
-             break;
-             case R.id.kdUp:
-                  //DO something
-            	 kdSend++;
-             	  kdShow = (float)(kdSend)/10;
-             	  kdValue.setText(""+kdShow);
+            	 trimYaw--;
+            	 //kiSend++;
+             	  //kiShow = (float)(kiSend)/10;
+             	 // kiValue.setText(""+kiShow);
              break;
              
-             case R.id.kpDown:
-                 //DO something
-            	 kpSend--;
-             	  if(kpSend < 0){
-             		kpSend = 0;
-             	  }
-             	  kpShow = (float)(kpSend)/10;
-             	  kpValue.setText(""+kpShow);
-            break;
-            case R.id.kiDown:
-                 //DO something
-            	 kiSend--;
-             	  if(kiSend < 0){
-             		kiSend = 0;
-             	  }
-             	  kiShow = (float)(kiSend)/10;
-             	  kiValue.setText(""+kiShow);
-            break;
-            case R.id.kdDown:
-                 //DO something
-            	 kdSend--;
-             	  if(kdSend < 0){
-             		kdSend = 0;
-             	  }
-             	  kdShow = (float)(kdSend)/10;
-             	  kdValue.setText(""+kdShow);
-            break;
-            */
+            
          }
 
    }
@@ -405,6 +380,7 @@ public class MainActivity extends Activity implements OnClickListener{
         			ch4_yaw += 9;
         		}
         	}
+        	ch4_yaw -= trimYaw;
         	//
         	//end off set
         	//dataOut.setText("Ele = "+String.valueOf(ch1_ele)+"  Roll = "+String.valueOf(ch2_roll)+"  Power = "+String.valueOf(ch3_power)+"  Yaw = "+String.valueOf(ch4_yaw));

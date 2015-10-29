@@ -6,22 +6,6 @@
     android:orientation="horizontal"
     android:rowCount="6" >
 
-    <com.example.espdronesremote.JoystickView
-        android:id="@+id/joystickView2"
-        android:layout_width="220dp"
-        android:layout_height="220dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_weight="0.10" />
-
-    <com.example.espdronesremote.JoystickView
-        android:id="@+id/joystickView"
-        android:layout_width="220dp"
-        android:layout_height="220dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_weight="0.10" />
-
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
@@ -61,5 +45,41 @@
     android:orientation="horizontal"
     android:rowCount="6" 
         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <com.example.espdronesremote.JoystickView
+        android:id="@+id/joystickView2"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_weight="0.10" />
+
+    <com.example.espdronesremote.JoystickView
+        android:id="@+id/joystickView"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textView1"
+        android:layout_weight="0.10" />
+
+    <Button
+        android:id="@+id/tYawLeft"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/tYawRight"
+        android:layout_marginLeft="20dp"
+        android:text="+left" />
+
+    <Button
+        android:id="@+id/tYawRight"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/joystickView2"
+        android:text="+Right" />
 
 </RelativeLayout>
