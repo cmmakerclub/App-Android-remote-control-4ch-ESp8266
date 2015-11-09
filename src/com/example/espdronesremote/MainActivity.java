@@ -38,8 +38,9 @@ public class MainActivity extends Activity implements OnClickListener{
 	    private Button kpUp ,kiUp ,kdUp,kpDown,kiDown,kdDown;
 	    private TextView kpValue,kiValue,kdValue;
 	    */
-	private Button tRightP,tLeftP;
-	private TextView sendOk;
+	private Button kpUp ,kiUp ,kdUp,kpDown,kiDown,kdDown;
+	
+	private TextView sendOk,pidValue;
 	    //TimerTask mTimer;
 	    //private SeekBar seekBar;
 	    // Importing also other views
@@ -100,11 +101,25 @@ public class MainActivity extends Activity implements OnClickListener{
         kiValue.setText(""+kiShow);
         kdValue.setText(""+kdShow);
         */
-		 tRightP = (Button) findViewById(R.id.tYawRight);
-	        tLeftP  = (Button) findViewById(R.id.tYawLeft);
+		 kpUp= (Button) findViewById(R.id.KpUp);
+	        kiUp = (Button) findViewById(R.id.KiUp);
+	        kdUp = (Button) findViewById(R.id.KdUp);
 	        
-	        tRightP.setOnClickListener(this);
-	        tLeftP.setOnClickListener(this);
+	        kpDown= (Button) findViewById(R.id.KpDown);
+	        kiDown = (Button) findViewById(R.id.KiDown);
+	        kdDown = (Button) findViewById(R.id.KdDown);
+	        
+	        kpUp.setOnClickListener(this);
+	        kiUp.setOnClickListener(this);
+	        kdUp.setOnClickListener(this);
+	        
+	        kpDown.setOnClickListener(this);
+	        kiDown.setOnClickListener(this);
+	        kdDown.setOnClickListener(this);
+	        
+	        pidValue = (TextView) findViewById(R.id.pidValue);
+	        pidValue.setText("Kp = "+kpShow+"  Ki = "+kiShow+"   Kd =  "+kpShow);
+		
         // Add Button event
        /* kpUp.setOnClickListener(new View.OnClickListener() {
           @Override
@@ -269,20 +284,64 @@ public class MainActivity extends Activity implements OnClickListener{
      public void onClick(View v) {
          switch(v.getId()){
          
-             case R.id.tYawRight:
+             case R.id.KpUp:
                   //DO something
-            	 trimYaw++;
-            	 //kpSend++;
-           	  //kpShow = (float)(kpSend)/10;
+            	 //trimYaw++;
+            	 kpSend++;
+            	 
+           	  kpShow = (float)(kpSend)/10;
            	  //kpValue.setText(""+kpShow);
+           	pidValue.setText("Kp = "+kpShow+"  Ki = "+kiShow+"   Kd =  "+kdShow);
              break;
-             case R.id.tYawLeft:
+             case R.id.KiUp:
                   //DO something
-            	 trimYaw--;
-            	 //kiSend++;
-             	  //kiShow = (float)(kiSend)/10;
+            	 //trimYaw--;
+            	 kiSend++;
+             	 kiShow = (float)(kiSend)/10;
              	 // kiValue.setText(""+kiShow);
+             	pidValue.setText("Kp = "+kpShow+"  Ki = "+kiShow+"   Kd =  "+kdShow);
              break;
+             case R.id.KdUp:
+                 //DO something
+           	 //trimYaw--;
+           	 kdSend++;
+            	  kdShow = (float)(kdSend)/10;
+            	 // kiValue.setText(""+kiShow);
+            	  pidValue.setText("Kp = "+kpShow+"  Ki = "+kiShow+"   Kd =  "+kdShow);
+            break;
+             case R.id.KpDown:
+                 //DO something
+           	 //trimYaw--;
+           	 kpSend--;
+           	if(kpSend < 0){
+        		kpSend = 0;
+        	}
+            	  kpShow = (float)(kpSend)/10;
+            	 // kiValue.setText(""+kiShow);
+            	  pidValue.setText("Kp = "+kpShow+"  Ki = "+kiShow+"   Kd =  "+kdShow);
+            break;
+             case R.id.KiDown:
+                 //DO something
+           	 //trimYaw--;
+           	 kiSend--;
+           	if(kiSend < 0){
+        		kiSend = 0;
+        	}
+            	  kiShow = (float)(kiSend)/10;
+            	 // kiValue.setText(""+kiShow);
+            	  pidValue.setText("Kp = "+kpShow+"  Ki = "+kiShow+"   Kd =  "+kdShow);
+            break;
+             case R.id.KdDown:
+                 //DO something
+           	 //trimYaw--;
+           	 kdSend--;
+           	if(kdSend < 0){
+        		kdSend = 0;
+        	}
+            	  kdShow = (float)(kdSend)/10;
+            	 // kiValue.setText(""+kiShow);
+            	  pidValue.setText("Kp = "+kpShow+"  Ki = "+kiShow+"   Kd =  "+kdShow);
+            break;
              
             
          }

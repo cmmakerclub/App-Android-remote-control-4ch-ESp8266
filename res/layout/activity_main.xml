@@ -63,23 +63,75 @@
         android:layout_weight="0.10" />
 
     <Button
-        android:id="@+id/tYawLeft"
-        style="?android:attr/buttonStyleSmall"
+        android:id="@+id/KpDown"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignTop="@+id/tYawRight"
-        android:layout_marginLeft="20dp"
-        android:text="+left" />
+        android:layout_below="@+id/joystickView2"
+        android:layout_toRightOf="@+id/joystickView2"
+        android:columnCount="2"
+        android:orientation="horizontal"
+        android:rowCount="6"
+        android:text="-Kp" />
 
     <Button
-        android:id="@+id/tYawRight"
+        android:id="@+id/KpUp"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/KpDown"
+        android:layout_toRightOf="@+id/joystickView2"
+        android:columnCount="2"
+        android:orientation="horizontal"
+        android:rowCount="5"
+        android:text="+Kp" />
+
+    <Button
+        android:id="@+id/KiUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/KpUp"
+        android:layout_alignBottom="@+id/KpUp"
+        android:layout_toRightOf="@+id/KpUp"
+        android:columnCount="3"
+    android:orientation="horizontal"
+    android:rowCount="4" 
+        android:text="+Ki" />
+
+    <Button
+        android:id="@+id/KiDown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/joystickView2"
-        android:text="+Right" />
+        android:layout_toRightOf="@+id/KpDown"
+        android:text="-Ki" />
+
+    <Button
+        android:id="@+id/KdUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="19dp"
+        android:text="+Kd" />
+
+    <Button
+        android:id="@+id/KdDown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="-Kd" />
+
+    <TextView
+        android:id="@+id/pidValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/KiDown"
+        android:layout_alignBottom="@+id/KiDown"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="16dp"
+        android:layout_toLeftOf="@+id/showData"
+        android:text="PID Kp Ki Kd" />
 
 </RelativeLayout>
