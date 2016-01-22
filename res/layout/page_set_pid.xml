@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/pidValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="pid"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
+        android:id="@+id/kiDown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/kiUp"
+        android:layout_below="@+id/kiUp"
+        android:text="-ki" />
+
+    <Button
+        android:id="@+id/kdUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/kiUp"
+        android:layout_alignBottom="@+id/kiUp"
+        android:layout_toRightOf="@+id/kiUp"
+        android:text="+kd" />
+
+    <Button
+        android:id="@+id/kdDown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/kiUp"
+        android:layout_toRightOf="@+id/kiUp"
+        android:text="-kd" />
+
+    <Button
+        android:id="@+id/backToMain"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="back" />
+
+    <Button
+        android:id="@+id/kpUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/pidValue"
+        android:layout_marginTop="26dp"
+        android:text="+kp" />
+
+    <Button
+        android:id="@+id/kpDown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/kpUp"
+        android:text="-kp" />
+
+    <Button
+        android:id="@+id/kiUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/kpDown"
+        android:layout_toRightOf="@+id/kpUp"
+        android:text="+ki" />
+
+</RelativeLayout>

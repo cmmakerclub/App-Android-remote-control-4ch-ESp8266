@@ -544,6 +544,24 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
         public static final int customNavigationLayout=0x7f010077;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int defaultBackgroundColor=0x7f0100cd;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int defaultBackgroundRangeColor=0x7f0100ce;
         /**  Default query hint used when {@code queryHint} is undefined and
              the search view's {@code SearchableInfo} does not provide a hint. 
          <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
@@ -884,6 +902,14 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int maxButtonHeight=0x7f0100ad;
+        /** <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int maxValue=0x7f0100ca;
         /**  When set to true, all children with a weight will be considered having
              the minimum size of the largest child. If false, all children are
              measured normally. 
@@ -906,6 +932,14 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int middleBarArrowSize=0x7f0100b9;
+        /** <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int minValue=0x7f0100c9;
         /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
@@ -1322,6 +1356,14 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int thickness=0x7f0100bb;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int thumbDrawable=0x7f0100cb;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int thumbPressedDrawable=0x7f0100cc;
         /**  Amount of padding on either side of text within the switch thumb. 
          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
@@ -1927,16 +1969,12 @@ containing a value of this type.
         public static final int abc_textfield_search_default_mtrl_alpha=0x7f020039;
         public static final int abc_textfield_search_material=0x7f02003a;
         public static final int ic_launcher=0x7f02003b;
-        public static final int notification_template_icon_bg=0x7f02003c;
+        public static final int notification_template_icon_bg=0x7f02003e;
+        public static final int seek_thumb_normal=0x7f02003c;
+        public static final int seek_thumb_pressed=0x7f02003d;
     }
     public static final class id {
-        public static final int KdDown=0x7f090059;
-        public static final int KdUp=0x7f090058;
-        public static final int KiDown=0x7f090057;
-        public static final int KiUp=0x7f090056;
-        public static final int KpDown=0x7f090054;
-        public static final int KpUp=0x7f090055;
-        public static final int action0=0x7f09005b;
+        public static final int action0=0x7f09005a;
         public static final int action_bar=0x7f090040;
         public static final int action_bar_activity_content=0x7f090003;
         public static final int action_bar_container=0x7f09003f;
@@ -1945,25 +1983,27 @@ containing a value of this type.
         public static final int action_bar_subtitle=0x7f090024;
         public static final int action_bar_title=0x7f090023;
         public static final int action_context_bar=0x7f090041;
-        public static final int action_divider=0x7f09005f;
+        public static final int action_divider=0x7f09005e;
         public static final int action_menu_divider=0x7f090005;
         public static final int action_menu_presenter=0x7f090006;
         public static final int action_mode_bar=0x7f09003d;
         public static final int action_mode_bar_stub=0x7f09003c;
         public static final int action_mode_close_button=0x7f090025;
-        public static final int action_settings=0x7f090068;
+        public static final int action_settings=0x7f09006f;
         public static final int activity_chooser_view_content=0x7f090026;
         public static final int alertTitle=0x7f090030;
         public static final int always=0x7f090019;
+        public static final int backToMain=0x7f09006c;
         public static final int beginning=0x7f090020;
         public static final int buttonPanel=0x7f090036;
-        public static final int cancel_action=0x7f09005c;
+        public static final int cancel_action=0x7f09005b;
         public static final int checkbox=0x7f090038;
-        public static final int chronometer=0x7f090062;
+        public static final int chronometer=0x7f090061;
         public static final int collapseActionView=0x7f09001a;
         public static final int contentPanel=0x7f090031;
         public static final int custom=0x7f090035;
         public static final int customPanel=0x7f090034;
+        public static final int dataSend=0x7f090054;
         public static final int decor_content_parent=0x7f09003e;
         public static final int default_activity_button=0x7f090029;
         public static final int dialog=0x7f09001e;
@@ -1971,7 +2011,7 @@ containing a value of this type.
         public static final int dropdown=0x7f09001f;
         public static final int edit_query=0x7f090042;
         public static final int end=0x7f090021;
-        public static final int end_padder=0x7f090067;
+        public static final int end_padder=0x7f090066;
         public static final int expand_activities_button=0x7f090027;
         public static final int expanded_menu=0x7f090037;
         public static final int home=0x7f090000;
@@ -1979,24 +2019,31 @@ containing a value of this type.
         public static final int icon=0x7f09002b;
         public static final int ifRoom=0x7f09001b;
         public static final int image=0x7f090028;
-        public static final int info=0x7f090066;
+        public static final int info=0x7f090065;
         public static final int joystickView=0x7f090052;
-        public static final int joystickView2=0x7f090050;
-        public static final int line1=0x7f090060;
-        public static final int line3=0x7f090064;
+        public static final int joystickView2=0x7f09004f;
+        public static final int kdDown=0x7f09006b;
+        public static final int kdUp=0x7f09006a;
+        public static final int kiDown=0x7f090068;
+        public static final int kiUp=0x7f090069;
+        public static final int kpDown=0x7f09006e;
+        public static final int kpUp=0x7f09006d;
+        public static final int line1=0x7f09005f;
+        public static final int line3=0x7f090063;
         public static final int listMode=0x7f09000a;
         public static final int list_item=0x7f09002a;
-        public static final int media_actions=0x7f09005e;
+        public static final int media_actions=0x7f09005d;
         public static final int middle=0x7f090022;
         public static final int multiply=0x7f090014;
         public static final int never=0x7f09001c;
         public static final int none=0x7f09000f;
         public static final int normal=0x7f09000b;
         public static final int parentPanel=0x7f09002d;
-        public static final int pidValue=0x7f09005a;
+        public static final int pidValue=0x7f090067;
         public static final int progress_circular=0x7f090007;
         public static final int progress_horizontal=0x7f090008;
         public static final int radio=0x7f09003a;
+        public static final int radioGroup=0x7f090056;
         public static final int screen=0x7f090015;
         public static final int scrollView=0x7f090032;
         public static final int search_badge=0x7f090044;
@@ -2010,27 +2057,31 @@ containing a value of this type.
         public static final int search_src_text=0x7f090049;
         public static final int search_voice_btn=0x7f09004d;
         public static final int select_dialog_listview=0x7f09004e;
+        public static final int sendData=0x7f090057;
         public static final int shortcut=0x7f090039;
         public static final int showCustom=0x7f090010;
-        public static final int showData=0x7f090053;
         public static final int showHome=0x7f090011;
         public static final int showTitle=0x7f090012;
         public static final int split_action_bar=0x7f090004;
         public static final int src_atop=0x7f090016;
         public static final int src_in=0x7f090017;
         public static final int src_over=0x7f090018;
-        public static final int status_bar_latest_event_content=0x7f09005d;
+        public static final int status_bar_latest_event_content=0x7f09005c;
+        public static final int stopData=0x7f090058;
         public static final int submit_area=0x7f09004b;
         public static final int tabMode=0x7f09000c;
-        public static final int text=0x7f090065;
-        public static final int text2=0x7f090063;
+        public static final int text=0x7f090064;
+        public static final int text2=0x7f090062;
         public static final int textSpacerNoButtons=0x7f090033;
-        public static final int textView1=0x7f09004f;
-        public static final int textView2=0x7f090051;
-        public static final int time=0x7f090061;
+        public static final int time=0x7f090060;
         public static final int title=0x7f09002c;
         public static final int title_template=0x7f09002f;
+        public static final int toSetPID=0x7f090051;
         public static final int topPanel=0x7f09002e;
+        public static final int trimPitchs=0x7f090059;
+        public static final int trimRolls=0x7f090053;
+        public static final int trimValue=0x7f090055;
+        public static final int trimYaws=0x7f090050;
         public static final int up=0x7f090001;
         public static final int useLogo=0x7f090013;
         public static final int withText=0x7f09001d;
@@ -2107,10 +2158,11 @@ containing a value of this type.
         public static final int notification_template_media=0x7f03001f;
         public static final int notification_template_part_chronometer=0x7f030020;
         public static final int notification_template_part_time=0x7f030021;
-        public static final int select_dialog_item_material=0x7f030022;
-        public static final int select_dialog_multichoice_material=0x7f030023;
-        public static final int select_dialog_singlechoice_material=0x7f030024;
-        public static final int support_simple_spinner_dropdown_item=0x7f030025;
+        public static final int page_set_pid=0x7f030022;
+        public static final int select_dialog_item_material=0x7f030023;
+        public static final int select_dialog_multichoice_material=0x7f030024;
+        public static final int select_dialog_singlechoice_material=0x7f030025;
+        public static final int support_simple_spinner_dropdown_item=0x7f030026;
     }
     public static final class menu {
         public static final int main=0x7f0c0000;
@@ -4741,6 +4793,108 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           @attr name com.example.espdronesremote:spinnerMode
         */
         public static final int Spinner_spinnerMode = 8;
+        /** Attributes that can be used with a StartPointSeekBar.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #StartPointSeekBar_defaultBackgroundColor com.example.espdronesremote:defaultBackgroundColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #StartPointSeekBar_defaultBackgroundRangeColor com.example.espdronesremote:defaultBackgroundRangeColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #StartPointSeekBar_maxValue com.example.espdronesremote:maxValue}</code></td><td></td></tr>
+           <tr><td><code>{@link #StartPointSeekBar_minValue com.example.espdronesremote:minValue}</code></td><td></td></tr>
+           <tr><td><code>{@link #StartPointSeekBar_thumbDrawable com.example.espdronesremote:thumbDrawable}</code></td><td></td></tr>
+           <tr><td><code>{@link #StartPointSeekBar_thumbPressedDrawable com.example.espdronesremote:thumbPressedDrawable}</code></td><td></td></tr>
+           </table>
+           @see #StartPointSeekBar_defaultBackgroundColor
+           @see #StartPointSeekBar_defaultBackgroundRangeColor
+           @see #StartPointSeekBar_maxValue
+           @see #StartPointSeekBar_minValue
+           @see #StartPointSeekBar_thumbDrawable
+           @see #StartPointSeekBar_thumbPressedDrawable
+         */
+        public static final int[] StartPointSeekBar = {
+            0x7f0100c9, 0x7f0100ca, 0x7f0100cb, 0x7f0100cc,
+            0x7f0100cd, 0x7f0100ce
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.example.espdronesremote.R.attr#defaultBackgroundColor}
+          attribute's value can be found in the {@link #StartPointSeekBar} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.example.espdronesremote:defaultBackgroundColor
+        */
+        public static final int StartPointSeekBar_defaultBackgroundColor = 4;
+        /**
+          <p>This symbol is the offset where the {@link com.example.espdronesremote.R.attr#defaultBackgroundRangeColor}
+          attribute's value can be found in the {@link #StartPointSeekBar} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.example.espdronesremote:defaultBackgroundRangeColor
+        */
+        public static final int StartPointSeekBar_defaultBackgroundRangeColor = 5;
+        /**
+          <p>This symbol is the offset where the {@link com.example.espdronesremote.R.attr#maxValue}
+          attribute's value can be found in the {@link #StartPointSeekBar} array.
+
+
+          <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.example.espdronesremote:maxValue
+        */
+        public static final int StartPointSeekBar_maxValue = 1;
+        /**
+          <p>This symbol is the offset where the {@link com.example.espdronesremote.R.attr#minValue}
+          attribute's value can be found in the {@link #StartPointSeekBar} array.
+
+
+          <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.example.espdronesremote:minValue
+        */
+        public static final int StartPointSeekBar_minValue = 0;
+        /**
+          <p>This symbol is the offset where the {@link com.example.espdronesremote.R.attr#thumbDrawable}
+          attribute's value can be found in the {@link #StartPointSeekBar} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name com.example.espdronesremote:thumbDrawable
+        */
+        public static final int StartPointSeekBar_thumbDrawable = 2;
+        /**
+          <p>This symbol is the offset where the {@link com.example.espdronesremote.R.attr#thumbPressedDrawable}
+          attribute's value can be found in the {@link #StartPointSeekBar} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name com.example.espdronesremote:thumbPressedDrawable
+        */
+        public static final int StartPointSeekBar_thumbPressedDrawable = 3;
         /** Attributes that can be used with a SwitchCompat.
            <p>Includes the following attributes:</p>
            <table>

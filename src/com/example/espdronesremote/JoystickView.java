@@ -1,5 +1,6 @@
 package com.example.espdronesremote;
 
+import android.R.bool;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -11,7 +12,7 @@ import android.view.View;
 public class JoystickView extends View implements Runnable {
 	// Constants
 	private final double RAD = 57.2957795;
-	public final static long DEFAULT_LOOP_INTERVAL = 100; // 100 ms
+	public final static long DEFAULT_LOOP_INTERVAL = 20; // 20 ms
 	public final static int FRONT = 3;
 	public final static int FRONT_RIGHT = 4;
 	public final static int RIGHT = 5;
@@ -33,6 +34,7 @@ public class JoystickView extends View implements Runnable {
 	private Paint button;
 	private Paint horizontalLine;
 	private Paint verticalLine;
+	private Paint rollLine;
 	private int joystickRadius;
 	private int buttonRadius;
 	private int lastAngle = 0;
@@ -40,6 +42,11 @@ public class JoystickView extends View implements Runnable {
 	boolean tMode = false;
 	boolean tLMode = false;
 	boolean joyCenter = true;
+	
+	public boolean firstToruc = true;
+	double offsetX;
+	double offsetY;
+
 	
 	public boolean joyMove = false;
 
@@ -59,7 +66,7 @@ public class JoystickView extends View implements Runnable {
 
 	protected void initJoystickView() {
 		mainCircle = new Paint(Paint.ANTI_ALIAS_FLAG);
-		mainCircle.setColor(Color.WHITE);
+		mainCircle.setColor(Color.TRANSPARENT);
 		mainCircle.setStyle(Paint.Style.FILL_AND_STROKE);
 
 		secondaryCircle = new Paint();
@@ -69,6 +76,12 @@ public class JoystickView extends View implements Runnable {
 		verticalLine = new Paint();
 		verticalLine.setStrokeWidth(5);
 		verticalLine.setColor(Color.RED);
+		
+		rollLine = new Paint();
+		rollLine.setStrokeWidth(5);
+		rollLine.setColor(Color.GREEN);
+		rollLine.setStyle(Paint.Style.STROKE); 
+		rollLine.setStrokeWidth(9f);
 
 		horizontalLine = new Paint();
 		horizontalLine.setStrokeWidth(2);
@@ -97,12 +110,12 @@ public class JoystickView extends View implements Runnable {
 		}
 		
 		if(tLMode == true){
-			yPosition = (int) getWidth() - (getWidth()/10);
+			yPosition = (int) (getWidth() - (getWidth()*0.11));
 			button.setColor(Color.YELLOW);
 			}
 		int d = Math.min(xNew, yNew);
-		buttonRadius = (int) (d / 2 * 0.55);
-		joystickRadius = (int) (d / 2 * 0.75);
+		buttonRadius = (int) (d / 2 * 0.25);
+		joystickRadius = (int) (d / 2 * 1);
 
 	}
 
@@ -148,12 +161,24 @@ public class JoystickView extends View implements Runnable {
 		// painting the secondary circle
 		canvas.drawCircle((int) centerX, (int) centerY, joystickRadius / 2,
 				secondaryCircle);
+		
+		// painting the square
+				canvas.drawLine((float)centerX*(float)0.3, (float)centerY*(float)0.3, (float)centerX*(float)0.3, (float)centerY*(float)1.7, secondaryCircle);  //((int) centerX, (int) centerY, joystickRadius / 2,
+						//secondaryCircle);
+				canvas.drawLine((float)centerX*(float)0.3, (float)centerY*(float)1.7, (float)centerX*(float)1.7,
+						(float)centerY*(float)1.7, secondaryCircle);
+				
+				canvas.drawLine((float)centerX*(float)1.7, (float)centerY*(float)1.7, 
+						(float)centerX*(float)1.7,(float)centerY*(float)0.3, secondaryCircle);
+				
+				canvas.drawLine((float)centerX*(float)1.7, (float)centerY*(float)0.3, 
+						(float)centerX*(float)0.3,(float)centerY*(float)0.3, secondaryCircle);
 		// paint lines
 		canvas.drawLine((float) centerX, (float) centerY, (float) centerX,
 				(float) (centerY - joystickRadius), verticalLine);
 		canvas.drawLine((float) (centerX - joystickRadius), (float) centerY,
 				(float) (centerX + joystickRadius), (float) centerY,
-				horizontalLine);
+				rollLine);
 		canvas.drawLine((float) centerX, (float) (centerY + joystickRadius),
 				(float) centerX, (float) centerY, horizontalLine);
 
@@ -165,18 +190,52 @@ public class JoystickView extends View implements Runnable {
 	public boolean onTouchEvent(MotionEvent event) {
 		xPosition = (int) event.getX();
 		yPosition = (int) event.getY();
-		double abs = Math.sqrt((xPosition - centerX) * (xPosition - centerX)
-				+ (yPosition - centerY) * (yPosition - centerY));
+		
+		if(firstToruc){
+		offsetX = xPosition - centerX;
+		offsetY = yPosition - centerY;
+		firstToruc = false;
+		}
+		
+		xPosition -= offsetX;
+		if(tMode == false){
+			yPosition -= offsetY;
+			}
+	
+		/*/
+		double abs = Math.sqrt(((xPosition) - centerX) * ((xPosition) - centerX)
+				+ ((yPosition) - centerY) * ((yPosition) - centerY));
+		
+		
 		if (abs > joystickRadius) {
 			xPosition = (int) ((xPosition - centerX) * joystickRadius / abs + centerX);
 			yPosition = (int) ((yPosition - centerY) * joystickRadius / abs + centerY);
 		}
+		*/
+		//check join stick out rectan
+		if(xPosition > (int) (centerX*1.68)){
+			xPosition = (int) (centerX*1.68);
+		}
+		if(xPosition < (int) (centerX*0.32)){
+			xPosition = (int) (centerX*0.32);
+		}
+		
+		if(yPosition > (int) (centerY*1.68)){
+			yPosition = (int) (centerY*1.68);
+		}
+		if(yPosition < (int) (centerY*0.32)){
+			yPosition = (int) (centerY*0.32);
+		}
+		//
 		invalidate();
 		if (event.getAction() == MotionEvent.ACTION_UP) {
 			xPosition = (int) centerX;
 			if(tMode == false){
-			yPosition = (int) centerY;
+			yPosition = (int) centerY ;
+			//yPosition -= offsetY;
 			}
+			
+			firstToruc = true;
 			thread.interrupt();
 			if (onJoystickMoveListener != null)
 				onJoystickMoveListener.onValueChanged(getAngle(), getPower(),
@@ -195,6 +254,7 @@ public class JoystickView extends View implements Runnable {
 		}
 		return true;
 	}
+	
 
 		public	int getAngle() {
 		if (xPosition > centerX) {
@@ -288,6 +348,7 @@ public class JoystickView extends View implements Runnable {
 					}else{
 						joyCenter = true;
 						joyMove = false;
+						//firstToruc = true;
 					}
 				}
 			});

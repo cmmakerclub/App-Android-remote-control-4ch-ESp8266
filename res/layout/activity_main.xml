@@ -6,132 +6,97 @@
     android:orientation="horizontal"
     android:rowCount="6" >
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/joystickView2"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="43dp"
-        android:columnCount="3"
-        android:orientation="horizontal"
-        android:rowCount="1"
-        android:text="คันเร่ง "
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/joystickView"
-        android:layout_alignLeft="@+id/joystickView"
-        android:layout_marginLeft="40dp"
-        android:text="เอียงซ้าย - ขวา"
-        android:columnCount="6"
-    android:orientation="horizontal"
-    android:rowCount="6" 
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/showData"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="Data out"
-         android:columnCount="6"
-    android:orientation="horizontal"
-    android:rowCount="6" 
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
     <com.example.espdronesremote.JoystickView
         android:id="@+id/joystickView2"
-        android:layout_width="220dp"
-        android:layout_height="220dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
+        android:layout_below="@+id/trimYaws"
+        android:layout_toLeftOf="@+id/toSetPID"
         android:layout_weight="0.10" />
 
     <com.example.espdronesremote.JoystickView
         android:id="@+id/joystickView"
-        android:layout_width="220dp"
-        android:layout_height="220dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/textView1"
+        android:layout_alignTop="@+id/joystickView2"
+        android:layout_toRightOf="@+id/toSetPID"
         android:layout_weight="0.10" />
 
-    <Button
-        android:id="@+id/KpDown"
-        android:layout_width="wrap_content"
+    <com.example.espdronesremote.StartPointSeekBar
+        android:id="@+id/trimYaws"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_below="@+id/joystickView2"
-        android:layout_toRightOf="@+id/joystickView2"
-        android:columnCount="2"
-        android:orientation="horizontal"
-        android:rowCount="6"
-        android:text="-Kp" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" />
 
     <Button
-        android:id="@+id/KpUp"
+        android:id="@+id/toSetPID"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/KpDown"
-        android:layout_toRightOf="@+id/joystickView2"
-        android:columnCount="2"
-        android:orientation="horizontal"
-        android:rowCount="5"
-        android:text="+Kp" />
-
-    <Button
-        android:id="@+id/KiUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/KpUp"
-        android:layout_alignBottom="@+id/KpUp"
-        android:layout_toRightOf="@+id/KpUp"
-        android:columnCount="3"
-    android:orientation="horizontal"
-    android:rowCount="4" 
-        android:text="+Ki" />
-
-    <Button
-        android:id="@+id/KiDown"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/KpDown"
-        android:text="-Ki" />
+        android:layout_centerHorizontal="true"
+        android:text="setup" />
 
-    <Button
-        android:id="@+id/KdUp"
-        android:layout_width="wrap_content"
+    <com.example.espdronesremote.StartPointSeekBar
+        android:id="@+id/trimRolls"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="19dp"
-        android:text="+Kd" />
-
-    <Button
-        android:id="@+id/KdDown"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:text="-Kd" />
+        android:layout_alignParentTop="true" />
 
-    <TextView
-        android:id="@+id/pidValue"
+<TextView
+    android:id="@+id/dataSend"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentTop="true"
+    android:text="Send"
+    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+<TextView
+    android:id="@+id/trimValue"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignLeft="@+id/dataSend"
+    android:layout_alignParentRight="true"
+    android:layout_below="@+id/dataSend"
+    android:text="trim data"
+    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+<RadioGroup
+    android:id="@+id/radioGroup"
+    android:layout_width="80dp"
+    android:layout_height="60dp"
+    android:layout_above="@+id/toSetPID"
+    android:layout_centerHorizontal="true"
+    android:orientation="vertical" >
+
+    <RadioButton
+        android:id="@+id/sendData"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/KiDown"
-        android:layout_alignBottom="@+id/KiDown"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="16dp"
-        android:layout_toLeftOf="@+id/showData"
-        android:text="PID Kp Ki Kd" />
+        android:text="Send!" />
+
+    <RadioButton
+        android:id="@+id/stopData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stop!" />
+</RadioGroup>
+
+<com.example.espdronesremote.StartPointSeekBar
+    android:id="@+id/trimPitchs"
+    android:layout_width="120dp"
+    android:layout_height="wrap_content"
+    android:layout_alignTop="@+id/joystickView2"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="34dp"
+    android:rotation="270" />
 
 </RelativeLayout>
