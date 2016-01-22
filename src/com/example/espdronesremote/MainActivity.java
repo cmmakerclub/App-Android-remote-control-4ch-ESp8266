@@ -655,8 +655,8 @@ public class MainActivity extends Activity {
         	
         	//String dataSends =  "a"+Integer.toString(ch1_ele)+"b"+Integer.toString(ch2_roll)+"c"+Integer.toString(ch3_power)+"d"+Integer.toString(ch4_yaw)+"p"+Integer.toString(kpSend)+"i"+Integer.toString(kiSend)+"k"+Integer.toString(kdSend)+"z"+Integer.toString(kiRoll)+"x"+Integer.toString(kiPitch)+"!";
 			
-		    packetDataControl[1] = (byte) ((byte) ch1_ele - 126);   
-		    packetDataControl[2] = (byte) ((byte) ch2_roll -126); 
+		    packetDataControl[1] = (byte) ((byte) ch2_roll - 126);   
+		    packetDataControl[2] = (byte) ((byte) ch1_ele -126); 
 		    packetDataControl[3] = (byte) ((byte) ch3_power - 126); 
 		    packetDataControl[4] =  (byte) ((byte) ch4_yaw - 126) ; 
 		    packetDataControl[5] =  (byte) ((byte) (ch1_ele + ch2_roll + ch3_power + ch4_yaw) -126 -122); //sum
