@@ -42,8 +42,8 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	String value;
-	byte   packetDataControl[] = {0x7f,126,126,0,126,0};//startBit,ch1,ch2,ch3,ch4,sum(ch1...4)
-	byte packetDataSetUp[] = {0x7f,0x7f,0x01,0,0,0,0};//startBit,startBit,Yaw= 0x01 Pitch = 0x02,Roll = 0x03,kp,ki,kd,sum(kp ki kd)
+	byte   packetDataControl[] = {(byte)0xfe,126,126,0,126,0};//startBit,ch1,ch2,ch3,ch4,sum(ch1...4)
+	byte packetDataSetUp[] = {(byte)0xfe,(byte)0xfe,0x01,0,0,0,0};//startBit,startBit,Yaw= 0x01 Pitch = 0x02,Roll = 0x03,kp,ki,kd,sum(kp ki kd)
 	long count = 0;
 	String serverIp;
 	InetAddress serverAddr;
@@ -554,17 +554,17 @@ public class MainActivity extends Activity {
         
         //if( (timemer % 5)  < 2){// send data to ESP here
         	//get x y to ech ch
-        	ch1_ele =  (int) ((y+99)*1.28);
-        	ch2_roll =  (int) ((x+99)*1.28);
+        	ch1_ele =  (int) ((y-6.5)*1.4705882352941176470588235294118);
+        	ch2_roll =  (int) ((x-6.5)*1.4705882352941176470588235294118);
         	if(startJoy2 == true){
-        		ch3_power =  (int) ((y2+99)*1.8)-55;
+        		ch3_power =  (int) ((y2 + 60)*0.9*0.85470085470085470085470085470085);
         		if(ch3_power<0){
         			ch3_power = 0;
         		}
         	}else{
         		ch3_power = 0;	
         	}
-        	ch4_yaw =  (int) ((x2+99)*1.28);
+        	ch4_yaw =  (int) ((x2-7)*1.4705882352941176470588235294118);
         	//offset
         	//
         	//.... CH1 ....
@@ -638,14 +638,14 @@ public class MainActivity extends Activity {
         	//
         	//end off set
         	if(ch1_ele < 0){
-        		ch1_ele = 0;
+        		//ch1_ele = 0;
         	}
         	if(ch2_roll < 0){
-        		ch2_roll = 0;
+        		//ch2_roll = 0;
         	}
         	
         	if(ch4_yaw < 0){
-        		ch4_yaw = 0;
+        		//ch4_yaw = 0;
         	}
         	//KI! off when control roll pitch
         	
@@ -655,11 +655,11 @@ public class MainActivity extends Activity {
         	
         	//String dataSends =  "a"+Integer.toString(ch1_ele)+"b"+Integer.toString(ch2_roll)+"c"+Integer.toString(ch3_power)+"d"+Integer.toString(ch4_yaw)+"p"+Integer.toString(kpSend)+"i"+Integer.toString(kiSend)+"k"+Integer.toString(kdSend)+"z"+Integer.toString(kiRoll)+"x"+Integer.toString(kiPitch)+"!";
 			
-		    packetDataControl[1] = (byte) ((byte) ch2_roll - 126);   
-		    packetDataControl[2] = (byte) ((byte) ch1_ele -126); 
-		    packetDataControl[3] = (byte) ((byte) ch3_power - 126); 
-		    packetDataControl[4] =  (byte) ((byte) ch4_yaw - 126) ; 
-		    packetDataControl[5] =  (byte) ((byte) (ch1_ele + ch2_roll + ch3_power + ch4_yaw) -126 -122); //sum
+		    packetDataControl[1] = (byte) ((byte) ch2_roll);   
+		    packetDataControl[2] = (byte) ((byte) ch1_ele); 
+		    packetDataControl[3] = (byte) ((byte) ch3_power); 
+		    packetDataControl[4] =  (byte) ((byte) ch4_yaw) ; 
+		    packetDataControl[5] =  (byte) ((byte) (((byte) ch2_roll) + ((byte) ch1_ele) + ch3_power + ((byte) ch4_yaw ))); //sum
 			//sendCount++;
 			if(sendDataFished){
 				myClientTask = new MyClientTask("");//send data to UDP
@@ -777,7 +777,7 @@ public class MainActivity extends Activity {
 		  protected void onPostExecute(Void result) {
 		  // textResponse.setText(response);
 			  //Toast.makeText(getApplicationContext(), "Send OK"+count+" "+num,Toast.LENGTH_SHORT).show();
-			  sendOk.setText("Send OK"+count+" "+packetDataControl[2]+"server ip"+serverAddr);
+			  sendOk.setText("Send OK"+count+" ch1:"+packetDataControl[1]+" ch2:"+packetDataControl[2]+" ch3:"+packetDataControl[3]+" ch4:"+packetDataControl[4]+" sum:"+packetDataControl[5]);
 			  if(!sendDatas){
 				  sendOk.setText("Stop!!");
 			  }
