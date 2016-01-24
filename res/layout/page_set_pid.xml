@@ -3,72 +3,149 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <TextView
-        android:id="@+id/pidValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:text="pid"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <Button
-        android:id="@+id/kiDown"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/kiUp"
-        android:layout_below="@+id/kiUp"
-        android:text="-ki" />
-
-    <Button
-        android:id="@+id/kdUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/kiUp"
-        android:layout_alignBottom="@+id/kiUp"
-        android:layout_toRightOf="@+id/kiUp"
-        android:text="+kd" />
-
-    <Button
-        android:id="@+id/kdDown"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/kiUp"
-        android:layout_toRightOf="@+id/kiUp"
-        android:text="-kd" />
-
     <Button
         android:id="@+id/backToMain"
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:text="back" />
 
-    <Button
-        android:id="@+id/kpUp"
+    <TextView
+        android:id="@+id/textViewKp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/pidValue"
-        android:layout_marginTop="26dp"
-        android:text="+kp" />
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="53dp"
+        android:text="Kp"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <Button
-        android:id="@+id/kpDown"
+    <SeekBar
+        android:id="@+id/seekBarKp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:max="200"
+        android:progress="0"
+        android:layout_below="@+id/textViewKp" />
+
+    <SeekBar
+        android:id="@+id/seekBarKi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+         android:max="200"
+          android:progress="0"
+        android:layout_below="@+id/textViewKi" />
+
+    <TextView
+        android:id="@+id/textViewKi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/kpUp"
-        android:text="-kp" />
+        android:layout_below="@+id/seekBarKp"
+        android:text="Ki"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <Button
-        android:id="@+id/kiUp"
+    <TextView
+        android:id="@+id/textViewKd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/kpDown"
-        android:layout_toRightOf="@+id/kpUp"
-        android:text="+ki" />
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/seekBarKi"
+        android:layout_marginTop="14dp"
+        android:text="Kd"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <SeekBar
+        android:id="@+id/seekBarKd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+         android:max="200"
+            android:progress="0"
+        android:layout_below="@+id/textViewKd" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupYPR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/backToMain"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:id="@+id/radio0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Yaw" />
+
+        <RadioButton
+            android:id="@+id/radio1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pitch" />
+
+        <RadioButton
+            android:id="@+id/radio2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Roll" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/textViewSendtoIp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="16dp"
+        android:text="Send to IP"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <Button
+        android:id="@+id/buttonSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:text="Submit" />
+
+    <EditText
+        android:id="@+id/editTextHostIp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/textViewSendtoIp"
+        android:layout_toRightOf="@+id/textViewSendtoIp"
+        android:ems="10"
+       
+        android:textAppearance="?android:attr/textAppearanceSmall" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/textViewPort"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/editTextHostIp"
+        android:layout_alignBottom="@+id/editTextHostIp"
+        android:layout_toRightOf="@+id/editTextHostIp"
+        android:text="Port"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <EditText
+        android:id="@+id/editTextPort"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textViewPort"
+        android:layout_alignBottom="@+id/textViewPort"
+        android:layout_toRightOf="@+id/textViewPort"
+        android:ems="10"
+        
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </RelativeLayout>

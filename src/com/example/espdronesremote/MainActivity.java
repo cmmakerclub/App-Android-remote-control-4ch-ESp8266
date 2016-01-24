@@ -43,10 +43,11 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
 	String value;
 	byte   packetDataControl[] = {(byte)0xfe,126,126,0,126,0};//startBit,ch1,ch2,ch3,ch4,sum(ch1...4)
-	byte packetDataSetUp[] = {(byte)0xfe,(byte)0xfe,0x01,0,0,0,0};//startBit,startBit,Yaw= 0x01 Pitch = 0x02,Roll = 0x03,kp,ki,kd,sum(kp ki kd)
+	//byte packetDataSetUp[] = {(byte)0xfe,(byte)0xfe,0x01,0,0,0,0};//startBit,startBit,Yaw= 0x01 Pitch = 0x02,Roll = 0x03,kp,ki,kd,sum(kp ki kd)
 	long count = 0;
 	String serverIp;
 	InetAddress serverAddr;
+	set_pid SetPid;
 	 /*private TextView angleTextView;
 	    private TextView powerTextView;
 	    private TextView directionTextView;
@@ -58,7 +59,10 @@ public class MainActivity extends Activity {
 	boolean sendDatas = false;
 	boolean sendDataFished = true;
 	
-	private Button setUp;
+	static String hostip = "192.168.5.1";
+	static String portS = "12345";
+	
+	private Button setUps;
 	private TextView sendOk;
 	StartPointSeekBar trimYaw,trimRoll,trimPitch;
 	 private TextView trimValues;
@@ -66,7 +70,7 @@ public class MainActivity extends Activity {
 	    //private SeekBar seekBar;
 	    // Importing also other views
 	    private JoystickView joystick,joystick2;
-	    MyClientTask myClientTask;
+	    MyClientTask myClientTask ;//= new MyClientTask("");
 	    
 	    int x = 0,ch2_roll = 126;
 	    int y = 0,ch1_ele = 126;
@@ -99,14 +103,19 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);//Alway on
 		sendOk = (TextView) findViewById(R.id.dataSend);
-		setUp = (Button)findViewById(R.id.toSetPID);//click to page setup PID
+		sendOk.setText("Send OK"+count+" ch1:"+packetDataControl[1]+" ch2:"+packetDataControl[2]+" ch3:"+packetDataControl[3]+" ch4:"+packetDataControl[4]+" sum:"+packetDataControl[5]);
+		
+		
+		setUps = (Button)findViewById(R.id.toSetPID);//click to page setup PID
 		radioGroup = (RadioGroup)findViewById(R.id.radioGroup);
+		
 		
 		trimValues = (TextView) findViewById(R.id.trimValue);//for show trim data each CH
 		//sendData = (RadioButton)findViewById(R.id.sendData);
 		//stopData = (RadioButton)findViewById(R.id.stopData);
 		//setup RadioButton
-		
+		//Toast.makeText(getApplicationContext(), "O_o",Toast.LENGTH_SHORT).show();
+		//myClientTask = new MyClientTask("");//send data to UDP
 		  /* Attach CheckedChangeListener to radio group */
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -117,11 +126,26 @@ public class MainActivity extends Activity {
                 	if(rb.getText().equals("Stop!")){
                 		sendDatas = false;
         				sendOk.setText("Stop!!! ");
+        				//if(myClientTask.getStatus().equals(AsyncTask.Status.RUNNING) ){
+        				//if(!myClientTask.isCancelled()){
+        				//	myClientTask.cancel(true);
+        				//	}
+        				//}
                 	}
                 	if(rb.getText().equals("Send!")){
                 		sendDatas = true;
                 		sendOk.setText("Send!");
-        				
+                		//myClientTask = new MyClientTask("");//send data to UDP
+                		//if(myClientTask.isCancelled()){
+                		//if(!myClientTask.getStatus().equals(AsyncTask.Status.RUNNING)){
+    	        		    // My AsyncTask is not currently doing work in doInBackground()
+                			//myClientTask = new MyClientTask("");//send data to UDP
+                		 //myClientTask.execute();
+                		//}
+                		//if(myClientTask.getStatus().equals(AsyncTask.Status.PENDING)){
+                			//myClientTask.execute();
+                		//}
+                		//}
                 	}
                 }
 
@@ -151,19 +175,29 @@ public class MainActivity extends Activity {
 			}
 		});
 		
-		
+		*/
 		
 		//set button setUp
-		setUp.setOnClickListener(new OnClickListener() {
+		setUps.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				//stop send control packet
+				
+				//
 				Intent i = new Intent(getApplicationContext(), set_pid.class);
+				/*
+				 * Destroy Main and open set_pid
+				 */
+				finish();
+				//if(!myClientTask.isCancelled()){
+					myClientTask.cancel(true);
+				//}
 				startActivity(i);
 			}
 		});
-		*/
+		
 		
 		//
 		
@@ -431,9 +465,12 @@ public class MainActivity extends Activity {
 	           @Override
 	           public void run() {
 	                   // What you want to do goes here
-	        	   
-	        	  
-	            	sendUDPdata();
+	        	
+	        	   //if(myClientTask.getStatus() != AsyncTask.Status.RUNNING){
+	        		    // My AsyncTask is not currently doing work in doInBackground()
+	        		   sendUDPdata();
+	        		//}
+	            	
 	            	
 	        	   
 	                 }
@@ -517,6 +554,17 @@ public class MainActivity extends Activity {
 
 	
 	/* (non-Javadoc)
+		 * @see android.app.Activity#onRestoreInstanceState(android.os.Bundle)
+		 */
+		@Override
+		protected void onRestoreInstanceState(Bundle savedInstanceState) {
+			// TODO Auto-generated method stub
+			Toast.makeText(getApplicationContext(), "back to main",Toast.LENGTH_SHORT).show();
+			super.onRestoreInstanceState(savedInstanceState);
+		}
+
+
+		/* (non-Javadoc)
 		 * @see android.app.Activity#onPause()
 		 */
 		@Override
@@ -662,14 +710,23 @@ public class MainActivity extends Activity {
 		    packetDataControl[5] =  (byte) ((byte) (((byte) ch2_roll) + ((byte) ch1_ele) + ch3_power + ((byte) ch4_yaw ))); //sum
 			//sendCount++;
 			if(sendDataFished){
-				myClientTask = new MyClientTask("");//send data to UDP
-			     myClientTask.execute();//work UDP
+				//if(myClientTask.getStatus() == AsyncTask.Status.PENDING){
+        		    // My AsyncTask is not currently doing work in doInBackground()
+				//if(myClientTask.getStatus().equals(AsyncTask.Status.PENDING)){
+				    myClientTask = new MyClientTask("");//send data to UDP
+					myClientTask.execute();//work UDP
+					sendDataFished = false;
+				//}
+			     //myClientTask.execute();//work UDP
+				
+			     
 			     //sendCount++;
-			     sendDataFished = false;
-			     count++;
-			     if(count > 10000){
-			    	 count = 0;
-			     }
+			     //sendDataFished = false;
+				//}
+			    // count++;
+			    // if(count > 10000){
+			    //	 count = 0;
+			     //}
 			  }
 			    
 			}else{
@@ -732,6 +789,7 @@ public class MainActivity extends Activity {
 	public class MyClientTask extends AsyncTask<Void, Void, Void> {
 		
 		String num;
+		int c;
 		  //String response = "";
 		  
 		  MyClientTask(String value){
@@ -742,6 +800,9 @@ public class MainActivity extends Activity {
 		@Override
 		protected Void doInBackground(Void... params) {
 			// TODO Auto-generated method stub
+			if(!myClientTask.isCancelled()){
+				//c++;
+				count++;
 			 String udpMsg = num;
 			  DatagramSocket ds = null;
 			//long tick = System.currentTimeMillis();
@@ -750,12 +811,22 @@ public class MainActivity extends Activity {
 			
 						   try {
 							   ds = new DatagramSocket();
-						         serverAddr = InetAddress.getByName("192.168.5.1");
+							   //if(SetPid.getHostIpToSend().equals("a")){
+						         serverAddr = InetAddress.getByName(hostip);
 						        
 						        //DatagramSocket ds = new DatagramSocket();
 						       // DatagramPacket dp;
-						        DatagramPacket dp = new DatagramPacket(packetDataControl, packetDataControl.length, serverAddr,12345);
+						        DatagramPacket dp = new DatagramPacket(packetDataControl, packetDataControl.length, serverAddr,Integer.parseInt(portS));
 						        ds.send(dp);
+							   //}else{
+								  // serverAddr = InetAddress.getByName("192.168.5.1");
+							        
+							        //DatagramSocket ds = new DatagramSocket();
+							       // DatagramPacket dp;
+							     //   DatagramPacket dp = new DatagramPacket(packetDataControl, packetDataControl.length, serverAddr,12345);
+							     //   ds.send(dp);
+						   //}
+						        //ds.send(dp);
 						        
 						        
 						   }catch (UnknownHostException e) {
@@ -769,15 +840,16 @@ public class MainActivity extends Activity {
 							   }finally{
 								   ds.close();
 							   }
-						   
+			}//end ceck task cancel		   
 			   return null;
+			
 		}
 		
 		  @Override
 		  protected void onPostExecute(Void result) {
 		  // textResponse.setText(response);
 			  //Toast.makeText(getApplicationContext(), "Send OK"+count+" "+num,Toast.LENGTH_SHORT).show();
-			  sendOk.setText("Send OK"+count+" ch1:"+packetDataControl[1]+" ch2:"+packetDataControl[2]+" ch3:"+packetDataControl[3]+" ch4:"+packetDataControl[4]+" sum:"+packetDataControl[5]);
+			  sendOk.setText("Send OK"+count+" ch1:"+packetDataControl[1]+" ch2:"+packetDataControl[2]+" ch3:"+packetDataControl[3]+" ch4:"+packetDataControl[4]+" sum:"+packetDataControl[5]+" host:"+hostip+" port:"+portS);
 			  if(!sendDatas){
 				  sendOk.setText("Stop!!");
 			  }
@@ -790,6 +862,15 @@ public class MainActivity extends Activity {
 		   super.onPostExecute(result);
 		//super.isCancelled();
 		  }
+		/* (non-Javadoc)
+		 * @see android.os.AsyncTask#onCancelled()
+		 */
+		@Override
+		protected void onCancelled() {
+			// TODO Auto-generated method stub
+			//Toast.makeText(getApplicationContext(), "tack cancelled",Toast.LENGTH_SHORT).show();
+			super.onCancelled();
+		}
 	}
 
 
@@ -802,4 +883,4 @@ public class MainActivity extends Activity {
 
 	
 	
-}
+}//end class main
